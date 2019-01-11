@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "f0231d25-705e-4135-8baa-db3bf74b5453",
+		"name": "B2e",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CriarUsuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"User\": \"jibao\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CriarUrl",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"User\": 2,\r\n  \"Url\": \"https://www.b2egroup.com.br\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"url"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ApagarUsuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/user?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ApagarUrl",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/url?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"url"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EstatisticasUsuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/user?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EstatisticasUrl",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/url?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"url"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estatisticas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:60440/api/hit/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "60440",
+					"path": [
+						"api",
+						"hit",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
