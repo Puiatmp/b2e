@@ -36,7 +36,8 @@
     "systemjs": "0.20.19",
     "core-js": "^2.5.1",
     "rxjs": "5.5.2",
-    "zone.js": "^0.8.29"
+    "zone.js": "^0.8.29",
+    "tslib": "1.6.1"
   },
   "devDependencies": {
     "concurrently": "^3.2.0",
