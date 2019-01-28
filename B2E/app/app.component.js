@@ -18,7 +18,8 @@ var AppComponent = /** @class */ (function () {
         this.restItemsUrl = 'http://localhost:60440/api/stats';
     }
     AppComponent.prototype.ngOnInit = function () {
-        this.getRestItems();
+        var retorno = this.getRestItems();
+        console.log(retorno);
     };
     AppComponent.prototype.getRestItems = function () {
         var _this = this;

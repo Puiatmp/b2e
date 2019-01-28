@@ -1,12 +1,12 @@
 ﻿<h1>Estatísticas encurtador de URLs</h1>
 
-<p>Esse compoente retorna dados gerais do serviço e as TOP 10 Urls clicadas.</p>
+<p>Esse componente retorna dados gerais do serviço e as TOP 10 Urls clicadas.</p>
 
 <p *ngIf="!my-app"><em>Carregando estatisticas...</em></p>
 
 <table class='table' *ngIf="my-app">
-    <tr *ngFor="let Stats of my-app">
-        <th>{{ Stats.Hits }}</th>
+    <tr >
+        <th>{{ my-app.Stats.Hits }}</th>
         <th>{{ Stats.UrlCount }}</th>
     </tr>
 </table>
