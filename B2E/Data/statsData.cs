@@ -16,20 +16,29 @@ namespace B2E.Data
                 DataTable reader = RS(qryEstatisticas);
                 if (reader.Rows.Count > 0)
                 {
-                    Retorno.UrlCount = Convert.ToInt16(reader.Rows[0]["urls"]);
-                    Retorno.Hits = Convert.ToInt16(reader.Rows[0]["total"]);
-                    Retorno.TopUrls = new List<url>();
-                    qryEstatisticas = @"SELECT u.id, r.user AS user, url, shorturl, hits FROM tb_urls u INNER JOIN tb_users r ON u.user = r.id ORDER BY hits DESC, u.id LIMIT 10";
-                    reader = RS(qryEstatisticas);
-                    foreach (DataRow row in reader.Rows)
+                    if (reader.Rows[0]["total"].ToString() != "")
                     {
-                        url url = new url();
-                        url.Id = Convert.ToInt32(row["id"].ToString());
-                        url.User = row["user"].ToString();
-                        url.Url = row["url"].ToString();
-                        url.Shorturl = row["shorturl"].ToString();
-                        url.Hits = Convert.ToInt32(row["hits"].ToString());
-                        Retorno.TopUrls.Add(url);
+                        Retorno.UrlCount = Convert.ToInt16(reader.Rows[0]["urls"]);
+                        Retorno.Hits = Convert.ToInt16(reader.Rows[0]["total"]);
+                        Retorno.TopUrls = new List<url>();
+                        qryEstatisticas = @"SELECT u.id, r.user AS user, url, shorturl, hits FROM tb_urls u INNER JOIN tb_users r ON u.user = r.id ORDER BY hits DESC, u.id LIMIT 10";
+                        reader = RS(qryEstatisticas);
+                        foreach (DataRow row in reader.Rows)
+                        {
+                            url url = new url();
+                            url.Id = Convert.ToInt32(row["id"].ToString());
+                            url.User = row["user"].ToString();
+                            url.Url = row["url"].ToString();
+                            url.Shorturl = row["shorturl"].ToString();
+                            url.Hits = Convert.ToInt32(row["hits"].ToString());
+                            Retorno.TopUrls.Add(url);
+                        }
+                    }
+                    else
+                    {
+                        Retorno.UrlCount = 0;
+                        Retorno.Hits = 0;
+                        Retorno.TopUrls = new List<url>();
                     }
                 }
             }
