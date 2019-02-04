@@ -1,6 +1,7 @@
 ﻿using B2E.Models;
 using B2E.Business;
 using System.Web.Http;
+using B2E.Data;
 
 namespace B2E.Controllers
 {
@@ -26,8 +27,34 @@ namespace B2E.Controllers
             retorno.Sucesso = false;
             if (parametros.User == "" || parametros.User == null)
                 retorno.Mensagem = "O campo Usuário não pode ficar em branco.";
+            else if (parametros.Pass == "" || parametros.Pass == null)
+                retorno.Mensagem = "O campo Password não pode ficar em branco.";
+            else if (parametros.Name == "" || parametros.Name == null)
+                retorno.Mensagem = "O campo Nome não pode ficar em branco.";
+            else if (parametros.Email == "" || parametros.Email == null)
+                retorno.Mensagem = "O campo E-Mail não pode ficar em branco.";
+            else if (!utilData.Valida_EMail(parametros.Email))
+                retorno.Mensagem = "O campo E-Mail contém um valor inválido.";
             else
-                retorno = userBusiness.CriarUsuario(parametros.User);
+                retorno = userBusiness.CriarUsuario(parametros.User, parametros.Pass, parametros.Name, parametros.Email);
+            //Incluir no log o response do processo e o tempo de execução (Elapsed time).
+            return retorno;
+        }
+
+        [HttpPost]
+        [Route("autenticar")]
+        public autenticaRetorno AutenticarUsuario(autenticaParams parametros)
+        {
+            //Incluir no log o start de execução (data e hora de início) e o request do processo.
+            autenticaRetorno retorno = new autenticaRetorno();
+            userBusiness userBusiness = new userBusiness();
+            retorno.Sucesso = false;
+            if (parametros.User == "" || parametros.User == null)
+                retorno.Mensagem = "O campo Usuário não pode ficar em branco.";
+            else if (parametros.Pass == "" || parametros.Pass == null)
+                retorno.Mensagem = "O campo Password não pode ficar em branco.";
+            else
+                retorno = userBusiness.AutenticarUsuario(parametros.User, parametros.Pass);
             //Incluir no log o response do processo e o tempo de execução (Elapsed time).
             return retorno;
         }
