@@ -7,7 +7,7 @@ namespace B2E.Data
 {
     public class userData : utilData
     {
-        internal bool CriarUsuario(string user, out string mensagem)
+        internal bool CriarUsuario(string user, string pass, string name, string email, out string mensagem)
         {
             bool Retorno = false;
             try
@@ -21,7 +21,7 @@ namespace B2E.Data
                 }
                 else
                 {
-                    if (Executar("INSERT INTO tb_users (user) VALUES (" + Aspas(user, false) + ")") > 0)
+                    if (Executar("INSERT INTO tb_users (user, pass, name, email) VALUES (" + Aspas(user, false) + ", " + Aspas(Encrypt2(pass, Chave), false) + ", " + Aspas(name, false) + ", " + Aspas(email, false) + ")") > 0)
                     {
                         Retorno = true;
                         mensagem = "Usuário incluído com sucesso.";
@@ -40,21 +40,57 @@ namespace B2E.Data
             return Retorno;
         }
 
+        internal user AutenticarUsuario(string user, string pass)
+        {
+            user Usuario = new user();
+            try
+            {
+                string qryUsuario = @"SELECT id, pass, name, email FROM tb_users WHERE user = " + Aspas(user, false);
+                DataTable reader = RS(qryUsuario);
+                foreach (DataRow row in reader.Rows)
+                {
+                    if (Decrypt2(row["pass"].ToString(), Chave) == pass)
+                    {
+                        Usuario.Id = Convert.ToInt32(row["id"].ToString());
+                        Usuario.User = user;
+                        Usuario.Pass = row["pass"].ToString();
+                        Usuario.Name = row["name"].ToString();
+                        Usuario.Email = row["email"].ToString();
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+            return Usuario;
+        }
+
         internal bool ApagarUsuario(int id, out string mensagem)
         {
             bool Retorno = false;
             try
             {
-                string qryUsuario = @"DELETE FROM tb_users WHERE id = " + id;
-                if (Executar(qryUsuario) > 0)
+                string qryUsuario = @"SELECT id FROM tb_urls WHERE user = " + id;
+                DataTable reader = RS(qryUsuario);
+                if (reader.Rows.Count > 0)
                 {
-                    Retorno = true;
-                    mensagem = "Usuário excluído com sucesso.";
+                    Retorno = false;
+                    mensagem = "Existem URLs cadastradas por esse usuário.";
                 }
                 else
                 {
-                    Retorno = false;
-                    mensagem = "Erro ao excluir usuário.";
+                    qryUsuario = @"DELETE FROM tb_users WHERE id = " + id;
+                    if (Executar(qryUsuario) > 0)
+                    {
+                        Retorno = true;
+                        mensagem = "Usuário excluído com sucesso.";
+                    }
+                    else
+                    {
+                        Retorno = false;
+                        mensagem = "Erro ao excluir usuário.";
+                    }
                 }
             }
             catch (Exception erro)

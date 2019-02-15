@@ -11,6 +11,7 @@ namespace B2E.Data
         public static MySqlConnection CN;
         public static MySqlCommand CM;
         public static int CodigoUsuario;
+        public static string Chave = "b2e";
 
         public static void Conectar(string String_Conexao)
         {

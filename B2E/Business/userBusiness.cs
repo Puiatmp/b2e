@@ -6,13 +6,13 @@ namespace B2E.Business
 {
     public class userBusiness : utilData
     {
-        public userRetorno CriarUsuario(string user)
+        public userRetorno CriarUsuario(string user, string pass, string name, string email)
         {
             userData usuarioData = new userData();
             userRetorno retorno = new userRetorno();
             try
             {
-                retorno.Sucesso = usuarioData.CriarUsuario(user, out string Mensagem);
+                retorno.Sucesso = usuarioData.CriarUsuario(user, pass, name, email, out string Mensagem);
                 retorno.Mensagem = Mensagem;
             }
             catch (Exception ex)
@@ -20,6 +20,28 @@ namespace B2E.Business
                 Tratamento(ex.HResult, ex.Message, ex.Source, "userBusiness.CriarUsuario(" + user + ")", ex.StackTrace, false, utilData.DB);
                 retorno.Sucesso = false;
                 retorno.Mensagem = "Erro ao criar usuario.";
+            }
+            return retorno;
+        }
+
+        public autenticaRetorno AutenticarUsuario(string user, string pass)
+        {
+            userData usuarioData = new userData();
+            autenticaRetorno retorno = new autenticaRetorno();
+            try
+            {
+                retorno.Sucesso = true;
+                retorno.User = usuarioData.AutenticarUsuario(user, pass);
+                if (retorno.User.Id != 0)
+                    retorno.Mensagem = "Usuário autenticado com sucesso.";
+                else
+                    retorno.Mensagem = "Usuário ou senha inválidos.";
+            }
+            catch (Exception ex)
+            {
+                Tratamento(ex.HResult, ex.Message, ex.Source, "userBusiness.AutenticarUsuario(" + user + ", " + pass + ")", ex.StackTrace, false, utilData.DB);
+                retorno.Sucesso = false;
+                retorno.Mensagem = "Erro ao autenticar usuario.";
             }
             return retorno;
         }
