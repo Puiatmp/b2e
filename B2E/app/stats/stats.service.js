@@ -11,19 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
-var Observable_1 = require("rxjs/Observable");
-require("rxjs/add/operator/catch");
-require("rxjs/add/observable/throw");
 var StatsService = /** @class */ (function () {
     function StatsService(http) {
         this.http = http;
-        this.stats_url = 'http://localhost:60440/api/stats';
+        this.statsUrl = "http://localhost:60440/api/stats";
     }
     StatsService.prototype.getStats = function () {
-        return this.http.get(this.stats_url).catch(this.errorHandler);
-    };
-    StatsService.prototype.errorHandler = function (error) {
-        return Observable_1.Observable.throw(error.message || "Server error");
+        return this.http.get("" + this.statsUrl);
     };
     StatsService = __decorate([
         core_1.Injectable(),

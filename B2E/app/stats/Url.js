@@ -6,4 +6,4 @@ var Url = /** @class */ (function () {
     return Url;
 }());
 exports.default = Url;
-//# sourceMappingURL=Url.js.map
+//# sourceMappingURL=url.js.map

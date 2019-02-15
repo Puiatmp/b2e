@@ -10,26 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var stats_service_1 = require("../stats/stats.service");
-var StudentsComponent = /** @class */ (function () {
-    function StudentsComponent(service) {
-        this.service = service;
+var stats_service_1 = require("./stats.service");
+var StatsComponent = /** @class */ (function () {
+    function StatsComponent(statsService) {
+        this.statsService = statsService;
     }
-    StudentsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.service.getStats()
-            .subscribe(function (data) { return _this.stats = data; }, function (error) { return _this.errorMsg = error; });
-        console.log(this.stats);
+    StatsComponent.prototype.ngOnInit = function () {
+        this.getStats();
     };
-    StudentsComponent = __decorate([
+    StatsComponent.prototype.getStats = function () {
+        var _this = this;
+        this.statsService.getStats().subscribe(function (dados) { return _this.stats = dados; });
+    };
+    StatsComponent = __decorate([
         core_1.Component({
             selector: 'app-stats',
-            templateUrl: '../stats/stats.component.html',
-            styleUrls: ['../stats/stats.component.css']
+            templateUrl: './stats.component.html',
+            styleUrls: ['./stats.component.css']
         }),
         __metadata("design:paramtypes", [stats_service_1.StatsService])
-    ], StudentsComponent);
-    return StudentsComponent;
+    ], StatsComponent);
+    return StatsComponent;
 }());
-exports.StudentsComponent = StudentsComponent;
+exports.StatsComponent = StatsComponent;
 //# sourceMappingURL=stats.component.js.map

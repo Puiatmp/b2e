@@ -1,12 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { StatsService } from "./stats/stats.service";
-import { Stats } from "./stats/stats"
+﻿import { Component, OnInit } from "@angular/core";
+import { StatsService } from "./stats.service";
+import { Stats } from "./stats"
 
 @Component({
     selector: 'app-stats',
-    templateUrl: './stats/stats.component.html'
+    templateUrl: './stats.component.html',
+    styleUrls: ['./stats.component.css']
 })
-export class AppComponent implements OnInit  {
+
+export class StatsComponent implements OnInit {
     stats: Stats;
 
     constructor(private statsService: StatsService) { }

@@ -10,13 +10,16 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/common/http");
 var app_component_1 = require("./app.component");
+var stats_component_1 = require("./stats/stats.component");
+var stats_service_1 = require("./stats/stats.service");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [http_1.HttpClientModule, platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent],
+            imports: [platform_browser_1.BrowserModule, http_1.HttpClientModule],
+            declarations: [app_component_1.AppComponent, stats_component_1.StatsComponent],
+            providers: [stats_service_1.StatsService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

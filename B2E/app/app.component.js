@@ -10,37 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/common/http");
-var operators_1 = require("rxjs/operators");
+var stats_service_1 = require("./stats/stats.service");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(http) {
-        this.http = http;
-        this.restItemsUrl = 'http://localhost:60440/api/stats';
+    function AppComponent(statsService) {
+        this.statsService = statsService;
     }
     AppComponent.prototype.ngOnInit = function () {
-        var retorno = this.getRestItems();
-        console.log(retorno);
+        this.getStats();
     };
-    AppComponent.prototype.getRestItems = function () {
+    AppComponent.prototype.getStats = function () {
         var _this = this;
-        this.restItemsServiceGetRestItems()
-            .subscribe(function (restItems) {
-            _this.restItems = restItems;
-            console.log(_this.restItems);
-        });
-    };
-    // Rest Items Service: Read all REST Items
-    AppComponent.prototype.restItemsServiceGetRestItems = function () {
-        return this.http
-            .get(this.restItemsUrl)
-            .pipe(operators_1.map(function (data) { return data; }));
+        this.statsService.getStats().subscribe(function (dados) { return _this.stats = dados; });
     };
     AppComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            templateUrl: './stats.component.html'
+            selector: 'app-stats',
+            templateUrl: './stats/stats.component.html'
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [stats_service_1.StatsService])
     ], AppComponent);
     return AppComponent;
 }());
